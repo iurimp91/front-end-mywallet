@@ -12,6 +12,14 @@ export const GlobalStyle = createGlobalStyle`
         color: #000000;
         outline: 0;
     }
+
+    button {
+        font-family: "Raleway";
+    }
+
+    button:hover {
+        opacity: 0.7;
+    }
 `;
 
 export const Body = styled.div`
