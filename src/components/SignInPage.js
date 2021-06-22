@@ -1,13 +1,21 @@
 import styled from "styled-components";
+import { useState } from "react";
 
 export default function SignInPage() {
+    const [disabled, setDisabled] = useState(false);
+    
+    function logIn() {
+        setDisabled(true);
+        alert("oi");
+    }
+
     return (
         <Body>
             <Title>MyWallet</Title>
-            <Form>
-                <input type="email" placeholder="E-mail" />
-                <input type="password" placeholder="Senha" />
-                <button>Entrar</button>
+            <Form onSubmit={logIn}>
+                <input disabled={disabled} type="email" placeholder="E-mail" required />
+                <input disabled={disabled} type="password" placeholder="Senha" required />
+                <button disabled={disabled}>Entrar</button>
             </Form>
             <span>Primera vez? Cadastre-se!</span>
         </Body>
@@ -55,6 +63,7 @@ const Form = styled.form`
         background-color: #FFFFFF;
         border: none;
         margin-bottom: 13px;
+        
     }
 
     button {
