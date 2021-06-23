@@ -39,7 +39,7 @@ export const Body = styled.div`
     }
 `;
 
-export const Title = styled.h1`
+export const Logo = styled.h1`
     font-family: 'Saira Stencil One';
     font-size: 32px;
     color: #FFFFFF;
@@ -76,4 +76,10 @@ export const Form = styled.form`
         font-weight: 700;
         border: none;
     }    
+`;
+
+export const Title = styled.h1`
+    font-size: 26px;
+    color: #FFFFFF;
+    font-weight: 700;
 `;

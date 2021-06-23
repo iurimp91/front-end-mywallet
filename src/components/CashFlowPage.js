@@ -3,6 +3,7 @@ import { RiLogoutBoxRLine } from "react-icons/ri";
 import { BiPlusCircle, BiMinusCircle } from "react-icons/bi";
 import CashFlowEntry from "./CashFlowEntry";
 import { useState } from "react";
+import { Title } from "./GlobalStyles";
 
 export default function CashFlowPage() {
     const [flow, setFlow] = useState([
@@ -50,7 +51,7 @@ export default function CashFlowPage() {
     return (
         <Body>
             <Header>
-                <h1>Olá, Fulano</h1>
+                <Title>Olá, Fulano</Title>
                 <RiLogoutBoxRLine className="logout-icon" />
             </Header>
             <CashFlowContainer flow={flow}>
@@ -97,12 +98,6 @@ const Header = styled.header`
     align-items: center;
     margin-bottom: 22px;
     position: relative;
-
-    h1 {
-        font-size: 26px;
-        color: #FFFFFF;
-        font-weight: 700;
-    }
 
     .logout-icon {
         color: #FFFFFF;

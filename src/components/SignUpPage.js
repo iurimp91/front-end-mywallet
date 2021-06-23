@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Body, Title, Form } from "./GlobalStyles";
+import { Body, Logo, Form } from "./GlobalStyles";
 
 export default function SignUpPage() {
     const [disabled, setDisabled] = useState(false);
@@ -11,7 +11,7 @@ export default function SignUpPage() {
 
     return (
         <Body>
-            <Title>MyWallet</Title>
+            <Logo>MyWallet</Logo>
             <Form onSubmit={signUp}>
                 <input disabled={disabled} type="text" placeholder="Nome" required />
                 <input disabled={disabled} type="email" placeholder="E-mail" required />
