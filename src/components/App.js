@@ -5,10 +5,15 @@ import CashFlowPage from "./CashFlowPage";
 import AddIncomePage from "./AddIncomePage";
 import AddExpensePage from "./AddExpensePage";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { useState } from "react";
+import UserContext from "../contexts/UserContext";
 
 export default function App() {
+    const [user, setUser] = useState("");
+
     return (
         <BrowserRouter>
+            <UserContext.Provider value={{ user, setUser }}>
             <GlobalStyle />
             <Switch>
                 <Route path="/" exact>    
@@ -27,6 +32,7 @@ export default function App() {
                     <AddExpensePage />
                 </Route>
             </Switch>
+            </UserContext.Provider>
         </BrowserRouter>
     );
 }
