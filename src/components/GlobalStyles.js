@@ -20,6 +20,10 @@ export const GlobalStyle = createGlobalStyle`
     button:hover {
         opacity: 0.7;
     }
+
+    a {
+        text-decoration: none;
+    }
 `;
 
 export const Body = styled.div`
@@ -31,7 +35,7 @@ export const Body = styled.div`
     justify-content: center;
     padding: 0 25px;
 
-    span {
+    a {
         font-size: 15px;
         font-weight: 700;
         color: #FFFFFF;

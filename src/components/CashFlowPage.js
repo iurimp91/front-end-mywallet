@@ -4,6 +4,7 @@ import { BiPlusCircle, BiMinusCircle } from "react-icons/bi";
 import CashFlowEntry from "./CashFlowEntry";
 import { useState } from "react";
 import { Title } from "./GlobalStyles";
+import { Link } from "react-router-dom";
 
 export default function CashFlowPage() {
     const [flow, setFlow] = useState([
@@ -68,14 +69,14 @@ export default function CashFlowPage() {
                 }
             </CashFlowContainer>
             <ButtonContainer>
-                <button>
+                <Link to="/income">
                     <BiPlusCircle className="button-icon" />
                     <span>Nova entrada</span>
-                </button>
-                <button>
+                </Link>
+                <Link to="/expense">
                     <BiMinusCircle className="button-icon" />
                     <span>Nova saída</span>
-                </button>
+                </Link>
             </ButtonContainer>
         </Body>
     );
@@ -149,7 +150,7 @@ const ButtonContainer = styled.div`
     justify-content: space-between;
     margin-top: 13px;
 
-    button {
+    a {
         width: calc((100% / 2) - 7.5px);
         height: 114px;
         padding: 10px;

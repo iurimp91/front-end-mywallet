@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Body, Logo, Form } from "./GlobalStyles";
+import { Link } from "react-router-dom";
 
 export default function SignInPage() {
     const [disabled, setDisabled] = useState(false);
@@ -17,7 +18,9 @@ export default function SignInPage() {
                 <input disabled={disabled} type="password" placeholder="Senha" required />
                 <button disabled={disabled}>Entrar</button>
             </Form>
-            <span>Primera vez? Cadastre-se!</span>
+            <Link to="/sign-up">
+                <span>Primera vez? Cadastre-se!</span>
+            </Link>
         </Body>
     );
 }
