@@ -23,8 +23,8 @@ export default function SignInPage() {
             setDisabled(false);
             setEmail("");
             setPassword("");
-            console.log(response.data);
-            // history.push("/cash-flow")
+            setUser(response.data);
+            history.push("/cash-flow");
         });
 
         request.catch(error => {

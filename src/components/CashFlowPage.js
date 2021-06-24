@@ -2,57 +2,43 @@ import styled from "styled-components";
 import { RiLogoutBoxRLine } from "react-icons/ri";
 import { BiPlusCircle, BiMinusCircle } from "react-icons/bi";
 import CashFlowEntry from "./CashFlowEntry";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Title } from "./GlobalStyles";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import UserContext from "../contexts/UserContext";
 
 export default function CashFlowPage() {
-    const [flow, setFlow] = useState([
-        {
-            date: "30/11",
-            description: "Almoço mãe",
-            value: 3990,
-            type: "expense",
-        },
-        {
-            date: "27/11",
-            description: "Mercado",
-            value: 54254,
-            type: "expense",
-        },
-        {
-            date: "26/11",
-            description: "Compras churrasco",
-            value: 6760,
-            type: "expense",
-        },
-        {
-            date: "20/11",
-            description: "Empréstimo Maria",
-            value: 50000,
-            type: "income",
-        },
-        {
-            date: "15/11",
-            description: "Salário",
-            value: 300000,
-            type: "income",
-        },
-    ]);
+    const { user, setUser } = useContext(UserContext);
+    const [flow, setFlow] = useState([]);
+    const [total, setTotal] = useState();
 
-    let total = 0;
-    flow.forEach(item => {
-        if(item.type === "income") {
-            total += item.value;
-        } else {
-            total -= item.value;
-        }
-    });
+    useEffect(() => {
+        const config = { headers: { Authorization: `Bearer ${user.token}` } };
+        const request = axios.get("http://localhost:4000/cash-flow", config);
 
+        request.then(response => {
+            setFlow(response.data);
+        });
+        request.catch(error => {
+            alert("Algo deu errado com sua requisição, por favor, tente novamente.");
+        });
+
+        let sum = 0;
+        flow.forEach((item) => {
+            if(item.type === "income") {
+                sum += item.value;
+            } else {
+                sum -= item.value;
+            }
+        });
+        setTotal(sum);
+    }, []);
+    
     return (
         <Body>
-            <Header>
-                <Title>Olá, Fulano</Title>
+            <Header>    
+                <Title>Olá, {user.name}</Title>
                 <RiLogoutBoxRLine className="logout-icon" />
             </Header>
             <CashFlowContainer flow={flow}>
@@ -92,7 +78,7 @@ const Body = styled.div`
     padding: 25px 25px 16px 25px;
 `;
 
-const Header = styled.header`
+const Header = styled.header`   
     width: 100%;
     display: flex;
     justify-content: space-between;

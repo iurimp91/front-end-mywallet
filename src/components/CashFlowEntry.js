@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export default function CashFlowEntry(props) {
     const { date, description, value, type } = props.item;
-    console.log(date, description, value, type);
 
     return(
         <EntryContainer type={type}>
