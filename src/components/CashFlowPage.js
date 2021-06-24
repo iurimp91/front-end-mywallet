@@ -9,7 +9,7 @@ import axios from "axios";
 import UserContext from "../contexts/UserContext";
 
 export default function CashFlowPage() {
-    const { user, setUser } = useContext(UserContext);
+    const { user } = useContext(UserContext);
     const [flow, setFlow] = useState([]);
     const [total, setTotal] = useState();
 
@@ -97,13 +97,14 @@ const Header = styled.header`
 
 const CashFlowContainer = styled.ul`
     width: 100%;
-    height: 446px;
+    height: 100%;
     background-color: #FFFFFF;
     border-radius: 5px;
-    padding: 23px 11px 10px 12px;
-    position: relative;
+    padding: 23px 11px 15px 12px;
     display: ${props => props.flow.length === 0 ? "flex" : "block"};
     align-items: ${props => props.flow.length === 0 ? "center" : ""};
+    overflow-y: auto;
+    overflow-x: hidden;
 
     h2 {
         font-size: 20px;
@@ -113,12 +114,14 @@ const CashFlowContainer = styled.ul`
 `;
 
 const Total = styled.div`
-    width: 100%;
+    width: calc(100% - 73px);
+    height: 26px;
     display: flex;
     justify-content: space-between;
-    position: absolute;
-    bottom: 10px;
-    padding-right: 25px;
+    align-items: center;
+    position: fixed;
+    top: calc(100% - 170px);
+    background-color: inherit;
 
 
     h1 {

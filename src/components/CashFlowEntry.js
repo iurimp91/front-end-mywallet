@@ -5,9 +5,9 @@ export default function CashFlowEntry(props) {
 
     return(
         <EntryContainer type={type}>
-            <div>
+            <div className="date-description-container">
                 <span className="date">{date}</span>
-                <span>{description}</span>
+                <div><span className="description">{description}</span></div>
             </div>
             <span className="value">{(value/100).toFixed(2).replace(".",",")}</span>
         </EntryContainer>
@@ -21,12 +21,22 @@ const EntryContainer = styled.li`
     font-size: 16px;
     margin-bottom: 20px;
 
+    .date-description-container {
+        display: flex;
+    }
+
     .date {
         color: #C6C6C6;
         margin-right: 5px;
+        width: 45px;
+    }
+
+    .description {
+        word-break: break-all;
     }
 
     .value {
         color: ${props => props.type === "expense" ? "#C70000" : "#50AD0E"};
+        margin-left: 3px;
     }
 `;
