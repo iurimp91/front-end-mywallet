@@ -23,7 +23,9 @@ export default function CashFlowPage() {
         request.catch(error => {
             alert("Algo deu errado com sua requisição, por favor, tente novamente.");
         });
+    }, []);
 
+    useEffect(() => {
         let sum = 0;
         flow.forEach((item) => {
             if(item.type === "income") {
@@ -33,7 +35,7 @@ export default function CashFlowPage() {
             }
         });
         setTotal(sum);
-    }, []);
+    }, [flow]);
     
     return (
         <Body>
