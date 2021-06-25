@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { RiContactsBookLine, RiLogoutBoxRLine } from "react-icons/ri";
+import { RiLogoutBoxRLine } from "react-icons/ri";
 import { BiPlusCircle, BiMinusCircle } from "react-icons/bi";
 import CashFlowEntry from "./CashFlowEntry";
 import { useContext, useEffect, useState } from "react";

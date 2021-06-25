@@ -6,7 +6,7 @@ import axios from "axios";
 
 export default function SignInPage() {
     const [disabled, setDisabled] = useState(false);
-    const { user, setUser } = useContext(UserContext); 
+    const { setUser } = useContext(UserContext); 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const history = useHistory();
