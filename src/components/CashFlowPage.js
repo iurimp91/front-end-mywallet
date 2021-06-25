@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { RiLogoutBoxRLine } from "react-icons/ri";
+import { RiContactsBookLine, RiLogoutBoxRLine } from "react-icons/ri";
 import { BiPlusCircle, BiMinusCircle } from "react-icons/bi";
 import CashFlowEntry from "./CashFlowEntry";
 import { useContext, useEffect, useState } from "react";
@@ -24,7 +24,13 @@ export default function CashFlowPage() {
         });
 
         request.catch(error => {
-            alert("Algo deu errado com sua requisição, por favor, tente novamente.");
+            if(error.response.status === 401) {
+                localStorage.removeItem("user");
+                alert("Você foi desligado pelo servidor, por favor, faça login novamente.");
+                history.push("/");
+            } else {
+                alert("Algo deu errado com sua requisição, por favor, tente novamente.");
+            }
         });
     }, []);
 
