@@ -4,7 +4,7 @@ import { BiPlusCircle, BiMinusCircle } from "react-icons/bi";
 import CashFlowEntry from "./CashFlowEntry";
 import { useContext, useEffect, useState } from "react";
 import { Title, Header } from "./GlobalStyles";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 import UserContext from "../contexts/UserContext";
 
@@ -13,6 +13,7 @@ export default function CashFlowPage() {
     const [flow, setFlow] = useState([]);
     const [total, setTotal] = useState();
     const localUser = JSON.parse(localStorage.getItem("user"));
+    const history = useHistory();
 
     useEffect(() => {
         const config = { headers: { Authorization: `Bearer ${user.token || localUser.token}` } };
@@ -20,11 +21,9 @@ export default function CashFlowPage() {
 
         request.then(response => {
             setFlow(response.data);
-            console.log(user);
         });
 
         request.catch(error => {
-            console.log(user);
             alert("Algo deu errado com sua requisição, por favor, tente novamente.");
         });
     }, []);
@@ -40,12 +39,26 @@ export default function CashFlowPage() {
         });
         setTotal(sum);
     }, [flow]);
+
+    function signOut() {
+        const config = { headers: { Authorization: `Bearer ${user.token || localUser.token}` } };
+        const request = axios.post("http://localhost:4000/sign-out", {}, config);
+
+        request.then(response => {
+            localStorage.removeItem("user");
+            history.push("/");
+        });
+
+        request.catch(error => {
+            alert("Algo deu errado com sua requisição, por favor, tente novamente.");
+        });
+    }
     
     return (
         <Body>
             <Header>    
                 <Title>Olá, {user.name || localUser.name}</Title>
-                <RiLogoutBoxRLine className="icon" />
+                <RiLogoutBoxRLine className="icon" onClick={signOut} />
             </Header>
             <CashFlowContainer flow={flow}>
                 {flow.length === 0 ? <h2>Não há registros de entrada ou saída</h2> :
