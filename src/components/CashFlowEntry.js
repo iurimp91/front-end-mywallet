@@ -21,6 +21,10 @@ const EntryContainer = styled.li`
     font-size: 16px;
     margin-bottom: 20px;
 
+    @media (max-width: 320px) {
+        font-size: 14px; 
+    }
+
     .date-description-container {
         display: flex;
     }

@@ -87,3 +87,25 @@ export const Title = styled.h1`
     color: #FFFFFF;
     font-weight: 700;
 `;
+
+export const Header = styled.header`   
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 22px;
+
+    .icon {
+        color: #FFFFFF;
+        font-size: 24px;
+        cursor: pointer;
+    }
+`;
+
+export const InputBody = styled.div`
+    padding: 25px;
+
+    h1, .icon {
+        margin-bottom: 18px;
+    }
+`;

@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { Body, Logo, Form } from "./GlobalStyles";
 import { Link, useHistory } from "react-router-dom";
 import UserContext from "../contexts/UserContext";
@@ -11,9 +11,16 @@ export default function SignInPage() {
     const [password, setPassword] = useState("");
     const history = useHistory();
 
+    useEffect(() => {
+        if(localStorage.length !== 0) {
+            const userData = localStorage.getItem("user");
+            setUser(JSON.parse(userData));
+            history.push("/cash-flow");
+        }
+    }, []);
+
     function logIn(e) {
         e.preventDefault();
-
         setDisabled(true);
 
         const body = { email, password };
@@ -24,6 +31,8 @@ export default function SignInPage() {
             setEmail("");
             setPassword("");
             setUser(response.data);
+            const stringUserData = JSON.stringify(response.data);
+            localStorage.setItem("user", stringUserData);
             history.push("/cash-flow");
         });
 

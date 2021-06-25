@@ -3,7 +3,7 @@ import { RiLogoutBoxRLine } from "react-icons/ri";
 import { BiPlusCircle, BiMinusCircle } from "react-icons/bi";
 import CashFlowEntry from "./CashFlowEntry";
 import { useContext, useEffect, useState } from "react";
-import { Title } from "./GlobalStyles";
+import { Title, Header } from "./GlobalStyles";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import UserContext from "../contexts/UserContext";
@@ -12,15 +12,19 @@ export default function CashFlowPage() {
     const { user } = useContext(UserContext);
     const [flow, setFlow] = useState([]);
     const [total, setTotal] = useState();
+    const localUser = JSON.parse(localStorage.getItem("user"));
 
     useEffect(() => {
-        const config = { headers: { Authorization: `Bearer ${user.token}` } };
+        const config = { headers: { Authorization: `Bearer ${user.token || localUser.token}` } };
         const request = axios.get("http://localhost:4000/cash-flow", config);
 
         request.then(response => {
             setFlow(response.data);
+            console.log(user);
         });
+
         request.catch(error => {
+            console.log(user);
             alert("Algo deu errado com sua requisição, por favor, tente novamente.");
         });
     }, []);
@@ -40,8 +44,8 @@ export default function CashFlowPage() {
     return (
         <Body>
             <Header>    
-                <Title>Olá, {user.name}</Title>
-                <RiLogoutBoxRLine className="logout-icon" />
+                <Title>Olá, {user.name || localUser.name}</Title>
+                <RiLogoutBoxRLine className="icon" />
             </Header>
             <CashFlowContainer flow={flow}>
                 {flow.length === 0 ? <h2>Não há registros de entrada ou saída</h2> :
@@ -78,21 +82,6 @@ const Body = styled.div`
     align-items: center;
     justify-content: center;
     padding: 25px 25px 16px 25px;
-`;
-
-const Header = styled.header`   
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 22px;
-    position: relative;
-
-    .logout-icon {
-        color: #FFFFFF;
-        font-size: 24px;
-        cursor: pointer;
-    }
 `;
 
 const CashFlowContainer = styled.ul`
