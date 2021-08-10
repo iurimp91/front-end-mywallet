@@ -1,10 +1,10 @@
 /* eslint-disable react/react-in-jsx-scope */
-import { GlobalStyle } from "./GlobalStyles";
-import SignInPage from "./SignInPage";
-import SignUpPage from "./SignUpPage";
-import CashFlowPage from "./CashFlowPage";
-import AddIncomePage from "./AddIncomePage";
-import AddExpensePage from "./AddExpensePage";
+import { GlobalStyle } from "./styles/GlobalStyles.js";
+import SignInPage from "./SignInPage.js";
+import SignUpPage from "./SignUpPage.js";
+import CashFlowPage from "./homePage/CashFlowPage.js";
+import AddIncomePage from "./addEntriesPages/AddIncomePage.js";
+import AddExpensePage from "./addEntriesPages/AddExpensePage.js";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { useState } from "react";
 import UserContext from "../contexts/UserContext";

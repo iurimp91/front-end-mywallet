@@ -1,10 +1,15 @@
+/* eslint-disable no-undef */
 /* eslint-disable react/react-in-jsx-scope */
 import { useState, useContext } from "react";
-import { Form, Title, Header, InputBody } from "./GlobalStyles";
+import { Form, Title, Header, InputBody } from "../styles/GlobalStyles.js";
 import axios from "axios";
-import UserContext from "../contexts/UserContext";
+import UserContext from "../../contexts/UserContext.js";
 import { AiOutlineRollback } from "react-icons/ai";
 import { useHistory } from "react-router-dom";
+import createConfigAndBody from "../utils/createConfigAndBody.js";
+import handleAddEntrySuccess from "../utils/handleAddEntrySuccess.js";
+import handleError from "../utils/handleError.js";
+import goBackHome from "../utils/goBackHome.js";
 
 export default function AddIncomePage() {
 	const [disabled, setDisabled] = useState(false);
@@ -18,45 +23,27 @@ export default function AddIncomePage() {
 		e.preventDefault();
 		setDisabled(true);
 
-		const config = {
-			headers: { Authorization: `Bearer ${user.token || localUser.token}` },
-		};
-		const centsValue = value * 100;
-		const body = { value: centsValue, description, type: "income" };
-		const request = axios.post("http://localhost:4000/input", body, config);
+		const configAndBodyobject = { user, localUser, value, description, type: "income" };
+		const { config, body } = createConfigAndBody(configAndBodyobject);
+
+		const request = axios.post(`${process.env.REACT_APP_API_BASE_URL}/input`, body, config);
 
 		request.then(() => {
-			setDisabled(false);
-			setValue("");
-			setDescription("");
+			handleAddEntrySuccess(setDisabled, setValue, setDescription);
 			alert("Entrada salva!");
 		});
 
 		request.catch((error) => {
 			setDisabled(false);
-			if (error.response.status === 401) {
-				localStorage.removeItem("user");
-				alert(
-					"Você foi desligado pelo servidor, por favor, faça login novamente."
-				);
-				history.push("/");
-			} else {
-				alert(
-					"Algo deu errado com sua requisição, por favor, tente novamente."
-				);
-			}
+			handleError(error, history);
 		});
-	}
-
-	function goBack() {
-		history.push("/cash-flow");
 	}
 
 	return (
 		<InputBody>
 			<Header>
 				<Title>Nova entrada</Title>
-				<AiOutlineRollback className="icon" onClick={goBack} />
+				<AiOutlineRollback className="icon" onClick={() => goBackHome(history)} />
 			</Header>
 			<Form onSubmit={addIncome}>
 				<input

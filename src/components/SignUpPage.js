@@ -1,6 +1,7 @@
+/* eslint-disable no-undef */
 /* eslint-disable react/react-in-jsx-scope */
 import { useState } from "react";
-import { Body, Logo, Form } from "./GlobalStyles";
+import { Body, Logo, Form } from "./styles/GlobalStyles.js";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 
@@ -21,7 +22,7 @@ export default function SignUpPage() {
 
 		setDisabled(true);
 		const body = { name, email, password };
-		const request = axios.post("http://localhost:4000/sign-up", body);
+		const request = axios.post(`${process.env.REACT_APP_API_BASE_URL}/sign-up`, body);
 
 		request.then(() => {
 			setDisabled(false);
@@ -35,9 +36,9 @@ export default function SignUpPage() {
 
 		request.catch((error) => {
 			setDisabled(false);
-			if (error.response.status === 401) {
+			if (error.response.status === 409) {
 				alert("O email escolhido já está cadastrado.");
-			} else {
+			} else if (error.response.status === 404) {
 				alert(
 					"Algo deu errado com sua requisição, por favor, tente novamente."
 				);

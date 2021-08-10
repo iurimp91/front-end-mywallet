@@ -1,13 +1,15 @@
+/* eslint-disable no-undef */
 /* eslint-disable react/react-in-jsx-scope */
 import styled from "styled-components";
 import { RiLogoutBoxRLine } from "react-icons/ri";
 import { BiPlusCircle, BiMinusCircle } from "react-icons/bi";
-import CashFlowEntry from "./CashFlowEntry";
+import CashFlowEntry from "./CashFlowEntry.js";
 import { useContext, useEffect, useState } from "react";
-import { Title, Header } from "./GlobalStyles";
+import { Title, Header } from "../styles/GlobalStyles.js";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
-import UserContext from "../contexts/UserContext";
+import UserContext from "../../contexts/UserContext.js";
+import handleError from "../utils/handleError.js";
 
 export default function CashFlowPage() {
 	const { user } = useContext(UserContext);
@@ -20,24 +22,14 @@ export default function CashFlowPage() {
 		const config = {
 			headers: { Authorization: `Bearer ${user.token || localUser.token}` },
 		};
-		const request = axios.get("http://localhost:4000/cash-flow", config);
+		const request = axios.get(`${process.env.REACT_APP_API_BASE_URL}/cash-flow`, config);
 
 		request.then((response) => {
 			setFlow(response.data);
 		});
 
 		request.catch((error) => {
-			if (error.response.status === 401) {
-				localStorage.removeItem("user");
-				alert(
-					"Você foi desligado pelo servidor, por favor, faça login novamente."
-				);
-				history.push("/");
-			} else {
-				alert(
-					"Algo deu errado com sua requisição, por favor, tente novamente."
-				);
-			}
+			handleError(error, history);
 		});
 	}, []);
 
@@ -57,7 +49,7 @@ export default function CashFlowPage() {
 		const config = {
 			headers: { Authorization: `Bearer ${user.token || localUser.token}` },
 		};
-		const request = axios.post("http://localhost:4000/sign-out", {}, config);
+		const request = axios.post(`${process.env.REACT_APP_API_BASE_URL}/sign-out`, {}, config);
 
 		request.then(() => {
 			localStorage.removeItem("user");
