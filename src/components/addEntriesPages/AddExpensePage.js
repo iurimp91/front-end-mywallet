@@ -23,10 +23,20 @@ export default function AddExpensePage() {
 		e.preventDefault();
 		setDisabled(true);
 
-		const configAndBodyobject = { user, localUser, value, description, type: "expense" };
+		const configAndBodyobject = {
+			user,
+			localUser,
+			value,
+			description,
+			type: "expense",
+		};
 		const { config, body } = createConfigAndBody(configAndBodyobject);
 
-		const request = axios.post(`${process.env.REACT_APP_API_BASE_URL}/input`, body, config);
+		const request = axios.post(
+			`${process.env.REACT_APP_API_BASE_URL}/input`,
+			body,
+			config
+		);
 
 		request.then(() => {
 			handleAddEntrySuccess(setDisabled, setValue, setDescription);
@@ -43,7 +53,10 @@ export default function AddExpensePage() {
 		<InputBody>
 			<Header>
 				<Title>Nova saída</Title>
-				<AiOutlineRollback className="icon" onClick={() => goBackHome(history)} />
+				<AiOutlineRollback
+					className="icon"
+					onClick={() => goBackHome(history)}
+				/>
 			</Header>
 			<Form onSubmit={addExpense}>
 				<input

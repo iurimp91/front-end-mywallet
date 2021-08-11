@@ -23,10 +23,20 @@ export default function AddIncomePage() {
 		e.preventDefault();
 		setDisabled(true);
 
-		const configAndBodyobject = { user, localUser, value, description, type: "income" };
+		const configAndBodyobject = {
+			user,
+			localUser,
+			value,
+			description,
+			type: "income",
+		};
 		const { config, body } = createConfigAndBody(configAndBodyobject);
 
-		const request = axios.post(`${process.env.REACT_APP_API_BASE_URL}/input`, body, config);
+		const request = axios.post(
+			`${process.env.REACT_APP_API_BASE_URL}/input`,
+			body,
+			config
+		);
 
 		request.then(() => {
 			handleAddEntrySuccess(setDisabled, setValue, setDescription);
@@ -43,7 +53,10 @@ export default function AddIncomePage() {
 		<InputBody>
 			<Header>
 				<Title>Nova entrada</Title>
-				<AiOutlineRollback className="icon" onClick={() => goBackHome(history)} />
+				<AiOutlineRollback
+					className="icon"
+					onClick={() => goBackHome(history)}
+				/>
 			</Header>
 			<Form onSubmit={addIncome}>
 				<input

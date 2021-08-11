@@ -22,7 +22,10 @@ export default function CashFlowPage() {
 		const config = {
 			headers: { Authorization: `Bearer ${user.token || localUser.token}` },
 		};
-		const request = axios.get(`${process.env.REACT_APP_API_BASE_URL}/cash-flow`, config);
+		const request = axios.get(
+			`${process.env.REACT_APP_API_BASE_URL}/cash-flow`,
+			config
+		);
 
 		request.then((response) => {
 			setFlow(response.data);
@@ -49,7 +52,11 @@ export default function CashFlowPage() {
 		const config = {
 			headers: { Authorization: `Bearer ${user.token || localUser.token}` },
 		};
-		const request = axios.post(`${process.env.REACT_APP_API_BASE_URL}/sign-out`, {}, config);
+		const request = axios.post(
+			`${process.env.REACT_APP_API_BASE_URL}/sign-out`,
+			{},
+			config
+		);
 
 		request.then(() => {
 			localStorage.removeItem("user");

@@ -22,7 +22,10 @@ export default function SignUpPage() {
 
 		setDisabled(true);
 		const body = { name, email, password };
-		const request = axios.post(`${process.env.REACT_APP_API_BASE_URL}/sign-up`, body);
+		const request = axios.post(
+			`${process.env.REACT_APP_API_BASE_URL}/sign-up`,
+			body
+		);
 
 		request.then(() => {
 			setDisabled(false);

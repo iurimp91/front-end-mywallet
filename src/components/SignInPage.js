@@ -26,7 +26,10 @@ export default function SignInPage() {
 		setDisabled(true);
 
 		const body = { email, password };
-		const request = axios.post(`${process.env.REACT_APP_API_BASE_URL}/sign-in`, body);
+		const request = axios.post(
+			`${process.env.REACT_APP_API_BASE_URL}/sign-in`,
+			body
+		);
 
 		request.then((response) => {
 			setDisabled(false);
