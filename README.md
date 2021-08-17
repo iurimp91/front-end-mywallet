@@ -18,24 +18,29 @@ This is an web application with which lots of people can manage their own expens
 
 By using this app any user can learn how they've been using their money and always keep track of your balance.
 
+### Next Steps
+
+Features and improvements that can be implemented:
+
+- Currency mask
+- React Toaster for friendly alerts
+- Cash flow history of each day
+
 ## Technologies
-The following tools and frameworks were used in the construction of the project:<br>
-<p>
-  <img style='margin: 5px;' src='https://img.shields.io/badge/styled-components%20-%2320232a.svg?&style=for-the-badge&color=b8679e&logo=styled-components&logoColor=%3a3a3a'>
-  <img style='margin: 5px;' src='https://img.shields.io/badge/axios%20-%2320232a.svg?&style=for-the-badge&color=informational'>
-  <img style='margin: 5px;' src="https://img.shields.io/badge/react-app%20-%2320232a.svg?&style=for-the-badge&color=60ddf9&logo=react&logoColor=%2361DAFB"/>
-  <img style='margin: 5px;' src="https://img.shields.io/badge/react_route%20-%2320232a.svg?&style=for-the-badge&logo=react&logoColor=%2361DAFB"/>
-  <img style='margin: 5px;' src='https://img.shields.io/badge/react-icons%20-%2320232a.svg?&style=for-the-badge&color=f28dc7&logo=react-icons&logoColor=%2361DAFB'>
-  <img style='margin: 5px;' src="https://img.shields.io/badge/react-input%20mask%20-%2320232a.svg?&style=for-the-badge&logo=react"/>
-  <img style='margin: 5px;' src="https://img.shields.io/badge/react-text%20mask%20-%2320232a.svg?&style=for-the-badge&logo=react"/>
-  <img style='margin: 5px;' src="https://img.shields.io/badge/text-mask%20addons%20-%2320232a.svg?&style=for-the-badge&logo=text-mask"/>
-</p>
+
+The following tools and frameworks were used in the construction of the project:
+
+- React App
+- React Route
+- React Icons
+- Axios
+- Styled Components
 
 ## How to run
 
 1. Clone this repository
-2. Clone the back-end repository at https://github.com/my-user/my-project-backend
-3. Follow instructions to run back-end at https://github.com/my-user/my-project-backend
+2. Clone the back-end repository at https://github.com/iurimp91/mywallet-api
+3. Follow instructions to run back-end at https://github.com/iurimp91/mywallet-api
 4. Install dependencies
 ```bash
 npm i
